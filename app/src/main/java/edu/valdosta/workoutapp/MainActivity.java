@@ -8,25 +8,13 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button strengthButton;
-    private Button enduranceButton;
-    private Button flexibiltyButton;
-    private Button balanceButton;
-
     private int buttonId;
     Intent intent;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        strengthButton = (Button) findViewById(R.id.strengthButton);
-        enduranceButton = (Button) findViewById(R.id.enduranceButton);
-        flexibiltyButton = (Button) findViewById(R.id.flexibilityButton);
-        balanceButton = (Button) findViewById(R.id.balanceButton);
     }
 
     public void onClick(View view){
@@ -47,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         startActivity(intent);
+    }
+
+    public void onClickSettings(View view){
+        intent = new Intent (this, SettingsActivity.class);
     }
     }
 

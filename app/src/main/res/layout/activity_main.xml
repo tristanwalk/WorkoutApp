@@ -24,6 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="@string/menuImgDescription"
             app:srcCompat="@drawable/menu" />
 
         <TextView
@@ -32,15 +34,18 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="2"
-            android:text="My Workouts"
+            android:text="@string/workoutTitle"
             android:textAlignment="center"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/settingsimg"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="@string/settingImgDescription"
+            android:onClick="onClickSettings"
             app:srcCompat="@drawable/settings" />
     </LinearLayout>
 
@@ -66,8 +71,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text="Strength"
-                android:textSize="24dp"/>
+                android:text="@string/strength"
+                android:textSize="24sp"/>
 
             <Button
                 android:id="@+id/enduranceButton"
@@ -75,8 +80,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text="Endurance"
-                android:textSize="24dp" />
+                android:text="@string/endurance"
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -90,8 +95,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text="Flexibilty"
-                android:textSize="24dp" />
+                android:text="@string/flex"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/balanceButton"
@@ -99,8 +104,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text="Balance"
-                android:textSize="24dp" />
+                android:text="@string/balance"
+                android:textSize="24sp" />
         </TableRow>
 
     </TableLayout>
