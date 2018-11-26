@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int buttonId;
     Intent intent;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
