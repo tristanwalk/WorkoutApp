@@ -8,6 +8,14 @@
     <string name="createProfile">Create Profile</string>
     <string name="createProfileDetail">Create a profile to get personalized workout plans for your specific needs and goals!</string>
     <string name="workoutTitle">My Workouts</string>
-    <string name="settingImgDescription">Setting wheel for settings button</string>
+    <string name="exerciseTitle">Exercises</string>
+    <string name="shouldersTitle">Shoulders</string>
+    <string name="armsTitle">Arms</string>
+    <string name="chestTitle">Chest</string>
+    <string name="absTitle">Abs</string>
+    <string name="lowerBodyTitle">Lower Body</string>
+    <string name="backTitle">Back</string>
     <string name="menuImgDescription">Menu icon for menu button</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

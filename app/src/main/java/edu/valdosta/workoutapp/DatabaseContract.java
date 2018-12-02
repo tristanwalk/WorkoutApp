@@ -11,6 +11,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_DESCRIPTION = "description";
         public static final String COLUMN_NAME_REGION = "region";
+        public static final String COLUMN_NAME_TYPE = "type";
         public static final String COLUMN_NAME_LINK = "link";
 
         public static final String SQL_CREATE_ENTRIES = "Create table " +
@@ -18,6 +19,7 @@ public final class DatabaseContract {
                 DataEntry.COLUMN_NAME_NAME + " TEXT, " +
                 DataEntry.COLUMN_NAME_DESCRIPTION + " TEXT, " +
                 DataEntry.COLUMN_NAME_REGION + " TEXT, " +
+                DataEntry.COLUMN_NAME_TYPE + " TEXT, " +
                 DataEntry.COLUMN_NAME_LINK + " TEXT)";
 
         public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + DataEntry.TABLE_NAME;

@@ -13,20 +13,20 @@ import android.view.View;
 
 import java.util.Objects;
 
-public class ExerciseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MyWorkoutsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private android.support.v7.widget.Toolbar toolbar;
     private int buttonId;
     private int menuItemId;
     private Intent intent;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abToggle;
+    private android.support.v7.widget.Toolbar toolbar;
     private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise);
+        setContentView(R.layout.activity_my_workouts);
 
         setNavigationViewListener();
 
@@ -37,7 +37,7 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
         abToggle.syncState();
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Exercises");
+        toolbar.setTitle("My Workouts");
         setSupportActionBar(toolbar);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -48,29 +48,17 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
         buttonId = view.getId();
 
         switch (buttonId) {
-            case R.id.shouldersButton:
-                intent = new Intent(this, RegionActivity.class);
-                intent.putExtra("region", "shoulders");
+            case R.id.strengthButton:
+                intent = new Intent(this, StrengthActivity.class);
                 break;
-            case R.id.armsButton:
-                intent = new Intent(this, RegionActivity.class);
-                intent.putExtra("region", "arms");
+            case R.id.enduranceButton:
+                intent = new Intent(this, EnduranceActivity.class);
                 break;
-            case R.id.chestButton:
-                intent = new Intent(this, RegionActivity.class);
-                intent.putExtra("region", "chest");
+            case R.id.flexibilityButton:
+                intent = new Intent(this, FlexibiltyActivity.class);
                 break;
-            case R.id.absButton:
-                intent = new Intent(this, RegionActivity.class);
-                intent.putExtra("region", "abs");
-                break;
-            case R.id.lowerBodyButton:
-                intent = new Intent(this, RegionActivity.class);
-                intent.putExtra("region", "legs");
-                break;
-            case R.id.backButton:
-                intent = new Intent(this, RegionActivity.class);
-                intent.putExtra("region", "back");
+            case R.id.balanceButton:
+                intent = new Intent(this, BalanceActivity.class);
                 break;
         }
         startActivity(intent);
@@ -80,12 +68,12 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         menuItemId = menuItem.getItemId();
         switch (menuItemId) {
-            case R.id.MyWorkouts: {
-                intent = new Intent(this, MyWorkoutsActivity.class);
+            case R.id.Exercises: {
+                intent = new Intent(this, ExerciseActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.Exercises: {
+            case R.id.MyWorkouts: {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             }
@@ -101,5 +89,6 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return abToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+
     }
 }
