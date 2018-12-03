@@ -39,11 +39,9 @@ public class DataDbHelper extends SQLiteOpenHelper{
     }
 
     public void onCreate(SQLiteDatabase db){
-        //SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(SQL_CREATE_ENTRIES);
 
         InputStream is = mContext.getResources().openRawResource(R.raw.exercises);
-        //InputStream is = mc
         //read line by line
         BufferedReader buffer = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
@@ -79,7 +77,6 @@ public class DataDbHelper extends SQLiteOpenHelper{
     }
 
     private boolean addData(SQLiteDatabase db, String name, String description, String region, String type, String link) {
-        //SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME_NAME, name);
         contentValues.put(COLUMN_NAME_DESCRIPTION, description);
@@ -95,7 +92,6 @@ public class DataDbHelper extends SQLiteOpenHelper{
     public Cursor getName(String region){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE region='"+region+"'";
-        //Cursor data = db.query("workoutData", new String[]{"name"}, "name = ?", new String[]{region}, null, null, null);
         return db.rawQuery(query, null);
     }
 
@@ -105,7 +101,6 @@ public class DataDbHelper extends SQLiteOpenHelper{
         return db.rawQuery(query, null);
     }
 
-    /*
     public void closeDatabase(){
         SQLiteDatabase db = this.getWritableDatabase();
         dbhelper.db.close();
@@ -116,5 +111,4 @@ public class DataDbHelper extends SQLiteOpenHelper{
         mContext.deleteDatabase(DATABASE_NAME);
         Log.v("deleteData", "Delete Succesful");
     }
-    */
 }

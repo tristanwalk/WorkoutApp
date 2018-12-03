@@ -40,23 +40,9 @@ public class MainActivity extends AppCompatActivity  {
         dbHelper = new DataDbHelper(this);
         //dbHelper.deleteDatabase(this);
 
-
         //default screen when opening the app
         intent = new Intent(this, MyWorkoutsActivity.class);
         startActivity(intent);
-
     }
-
-    /*
-    public static void addData(String name, String description, String region, String type, String link) {
-        boolean insertData = dbHelper.addData(name, description, region, type, link);
-
-        if (insertData) {
-            Log.v("addData", "Successful");
-        } else {
-            Log.v("addData", "Not Successful");
-        }
-    }
-    */
 }
 
