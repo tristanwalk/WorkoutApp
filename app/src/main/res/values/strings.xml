@@ -18,4 +18,7 @@
     <string name="menuImgDescription">Menu icon for menu button</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="defaultWorkouts">default Workouts</string>
+    <string name="customWorkouts">Custom Workouts</string>
+    <string name="addWorkoutButtonDesc"> Button to add a workout into workout database</string>
 </resources>

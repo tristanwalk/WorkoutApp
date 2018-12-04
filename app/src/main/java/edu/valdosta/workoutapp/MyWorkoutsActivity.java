@@ -44,7 +44,7 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
     }
 
-    public void onClick(View view) {
+    /*public void onClick(View view) {
         buttonId = view.getId();
 
         switch (buttonId) {
@@ -59,6 +59,20 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
                 break;
             case R.id.balanceButton:
                 intent = new Intent(this, BalanceActivity.class);
+                break;
+        }
+        startActivity(intent);
+    }*/
+
+    public void onClick(View view) {
+        buttonId = view.getId();
+
+        switch (buttonId) {
+            case R.id.defaultWorkoutButton:
+                intent = new Intent(this, StrengthActivity.class);
+                break;
+            case R.id.customWorkoutButton:
+                intent = new Intent(this, EnduranceActivity.class);
                 break;
         }
         startActivity(intent);
