@@ -5,6 +5,8 @@
         android:title="@string/workoutTitle" />
     <item android:id="@+id/Exercises"
         android:title="@string/exerciseTitle"/>
+    <item android:id="@+id/Settings"
+        android:title="@string/settingsTitle"/>
 
 
 </menu>

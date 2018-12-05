@@ -21,6 +21,9 @@ import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_TYP
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_DELETE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME2;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_ID;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES2;
 
 public class DataDbHelper extends SQLiteOpenHelper{
 
@@ -37,8 +40,13 @@ public class DataDbHelper extends SQLiteOpenHelper{
         this.mContext = context;
     }
 
+    @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_ENTRIES2);
+
+
+
 
         InputStream is = mContext.getResources().openRawResource(R.raw.exercises);
         //read line by line
@@ -88,16 +96,51 @@ public class DataDbHelper extends SQLiteOpenHelper{
         return result != -1;
     }
 
-    public Cursor getName(String region){
+    public boolean addDataToCustomWorkouts(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE region='"+region+"'";
-        return db.rawQuery(query, null);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME_NAME, name);
+
+        long result = db.insert(TABLE_NAME2, null, contentValues);
+
+        return result != -1;
+    }
+
+    public Cursor getName(String temp, int i){
+        SQLiteDatabase db = this.getWritableDatabase();
+        if (i == 0){
+            String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE region='"+temp+"'";
+            return db.rawQuery(query, null);
+        }else if (i == 1){
+            String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME2 + " WHERE name='"+temp+"'";
+            return db.rawQuery(query, null);
+        }else {
+            return null;
+        }
     }
 
     public Cursor getDescription(String exercise) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COLUMN_NAME_DESCRIPTION + " FROM " + TABLE_NAME + " WHERE name='"+exercise+"'";
         return db.rawQuery(query, null);
+    }
+    public void deleteData(String name, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME2 + " WHERE " + COLUMN_ID + " = '" + id + "'" + " AND " + COLUMN_NAME_NAME + " = '" + name + "'";
+        db.execSQL(query);
+
+    }
+
+    public Cursor getData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME2;
+        return db.rawQuery(query, null);
+    }
+
+
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        return super.getWritableDatabase();
     }
 
     public void closeDatabase(){
@@ -108,6 +151,6 @@ public class DataDbHelper extends SQLiteOpenHelper{
 
     public static void deleteDatabase(Context mContext){
         mContext.deleteDatabase(DATABASE_NAME);
-        Log.v("deleteData", "Delete Succesful");
+        Log.v("deleteData", "Delete Successful");
     }
 }
