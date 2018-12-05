@@ -24,16 +24,17 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
     private ListView exerciseList;
     private final static String TAG = "RegionActivity";
     DataDbHelper dbHelper;
+    int id;
     private int buttonId;
-    private int listItemId;
+    private int listItemId, customWorkoutTable;
     private Intent intent;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abToggle;
     private android.support.v7.widget.Toolbar toolbar;
     private NavigationView navView;
     private int menuItemId;
-    private String region;
-    ArrayList<String> ExerciseNames = new ArrayList<>();
+    private String region, workoutName;
+    ArrayList<String> ExerciseNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,12 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
 
         Intent intent = getIntent();
         region = intent.getStringExtra("region");
+        workoutName = intent.getStringExtra("name");
+
+
+
+
+
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(region + " Exercises");
@@ -61,8 +68,16 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
         exerciseList = findViewById(R.id.exerciseListView);
         dbHelper = new DataDbHelper(this);
         
-        populateListView();
+        if (region != null) {
+            populateListView(region , 0);
+            toolbar.setTitle(region + " Exercises");
+            setSupportActionBar(toolbar);
 
+        } else if (workoutName != null){
+            populateListView(workoutName, 1);
+            toolbar.setTitle(workoutName + " Exercises");
+            setSupportActionBar(toolbar);
+        }
         exerciseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -75,8 +90,9 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
         });
     }
 
-    private void populateListView() {
-        Cursor data = dbHelper.getName(region);
+    private void populateListView(String q, int i) {
+        Cursor data = dbHelper.getName(q, i);
+        ExerciseNames = new ArrayList<>();
         while(data.moveToNext()){
             ExerciseNames.add(data.getString(0));
         }
@@ -101,6 +117,11 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
             }
             case R.id.MyWorkouts: {
                 intent = new Intent(this, MyWorkoutsActivity.class);
+                break;
+            }
+            case R.id.Settings: {
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 break;
             }
         }

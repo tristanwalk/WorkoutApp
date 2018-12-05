@@ -84,6 +84,11 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
                 intent = new Intent(this, MyWorkoutsActivity.class);
                 break;
             }
+            case R.id.Settings: {
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
         return true;
     }
