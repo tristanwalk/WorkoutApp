@@ -14,7 +14,6 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_REGION = "region";
         public static final String COLUMN_NAME_TYPE = "type";
         public static final String COLUMN_NAME_LINK = "link";
-        public static final String COLUMN_ID = "ID";
 
         public static final String SQL_CREATE_ENTRIES = "Create table " +
                 DataEntry.TABLE_NAME + " (" + DataEntry._ID + " INTEGER PRIMARY KEY, " +

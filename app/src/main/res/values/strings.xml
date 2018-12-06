@@ -25,4 +25,15 @@
     <string name="hintForWorkoutsText">Enter The Name of Your Workout</string>
     <string name="addWorkoutButtonText">Add Workout</string>
     <string name="settingsTitle">Settings</string>
+    <string name="weightTitle">Weight:</string>
+    <string name="nameTitle">Name:</string>
+    <string name="ageTitle">Age:</string>
+    <string name="sexTitle">Sex:</string>
+    <string name="heightTitle">Height:</string>
+    <string name="heightTip">(in inches)</string>
+    <string name="maleButtonTitle">Male</string>
+    <string name="femaleButtonTitle">Female</string>
+    <string name="submitButtonTitle">Submit</string>
+    <string name="bmiTitle">BMI:</string>
+
 </resources>

@@ -23,6 +23,7 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MyWorkoutsActivity" />
         <activity android:name=".RegionActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".DisplayExercise" />
         <activity android:name=".AddToWorkoutsActivity"
             android:theme="@style/AppTheme.CustomTheme"/>

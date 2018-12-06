@@ -58,7 +58,7 @@ public class AddToWorkoutsActivity extends AppCompatActivity {
     public void onClick (View view) {
         String i = input.getText().toString();
         //fix so that i cannot be empty
-        if (i.equals("")){
+        if (!(i.equals(""))){
             System.out.println(i);
             addData(i);
             intent = new Intent(this, MyWorkoutsActivity.class);

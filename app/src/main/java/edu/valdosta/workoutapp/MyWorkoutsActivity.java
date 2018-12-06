@@ -52,9 +52,6 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
 
         intent = getIntent();
 
-
-
-
         setNavigationViewListener();
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -88,18 +85,14 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
             }
         });
 
-
         arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 listOfItems
         );
 
-
         populateList();
-
     }
-
 
     public void onClick(View view) {
         intent = new Intent(this, AddToWorkoutsActivity.class);
@@ -155,12 +148,6 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
                 listOfItems
         );
         customWorkouts.setAdapter(arrayAdapter);
-
-
-
-
-
-
     }
     public void toastMessage (String m) {
         Toast.makeText(this,m, Toast.LENGTH_SHORT).show();
