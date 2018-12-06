@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
@@ -24,12 +23,19 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private double weight;
     private String sex;
     private String name;
+    private int skill;
     private EditText nameView;
     private EditText ageView;
     private EditText heightView;
     private EditText weightView;
     private RadioButton maleRadio;
     private RadioButton femaleRadio;
+    RadioButton weak;
+    RadioButton neutral;
+    RadioButton athletic;
+    RadioButton novice;
+    RadioButton intermediate;
+    RadioButton expert;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abToggle;
     private android.support.v7.widget.Toolbar toolbar;
@@ -37,10 +43,23 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private int menuItemId;
     private Intent intent;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        maleRadio = (RadioButton) findViewById(R.id.maleRadio);
+        femaleRadio = (RadioButton) findViewById(R.id.femaleRadio);
+        weak = (RadioButton) findViewById(R.id.weak);
+        neutral = (RadioButton) findViewById(R.id.neutral);
+        athletic = (RadioButton) findViewById(R.id.athletic);
+        novice = (RadioButton) findViewById(R.id.novice);
+        intermediate = (RadioButton) findViewById(R.id.intermediate);
+        expert = (RadioButton) findViewById(R.id.expert);
+        nameView = (EditText) findViewById(R.id.nameView);
+        ageView = (EditText) findViewById(R.id.ageView);
+        heightView = (EditText) findViewById(R.id.heightView);
 
         setNavigationViewListener();
 
@@ -67,20 +86,19 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         heightInInches = 0;
         bmi = 0;
         weight = 0;
+        skill = 0;
     }
+
     public double calculateBMI(double heightInInches, double weight){
-        //double height = heightInInches*heightInInches;
-        //double value = weight/height;
         bmi = 703 * (weight/(heightInInches*heightInInches));
-        //System.out.println(bmi);
         return bmi;
     }
     public void submitOnClick(View view){
         try {
             if (maleRadio.isChecked()) {
-                sex = "Male";
+                sex = "@string/Male";
             } else {
-                sex = "Female";
+                sex = "@string/Female";
             }
 
             name = nameView.getText().toString();
@@ -97,6 +115,28 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         catch (NumberFormatException | IllegalStateException e){
             Toast.makeText(this, "Please fill out all fields!", Toast.LENGTH_SHORT).show();
         }
+        if(weak.isChecked()){
+            skill += 1;
+        }
+        else if (neutral.isChecked()){
+            skill += 2;
+        }
+        else{
+            skill += 3;
+        }
+        if(novice.isChecked()){
+            skill += 1;
+        }
+        else if (intermediate.isChecked()){
+            skill += 2;
+        }
+        else{
+            skill += 3;
+        }
+
+        name = nameView.getText().toString();
+        age = Integer.parseInt(ageView.getText().toString());
+        heightInInches = Integer.parseInt(heightView.getText().toString());;
     }
 
     public void setNavigationViewListener() {
@@ -131,3 +171,4 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         return abToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 }
+
