@@ -19,11 +19,13 @@ import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_NAM
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_REGION;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_TYPE;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES3;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_DELETE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME2;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_ID;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES2;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME3;
 
 public class DataDbHelper extends SQLiteOpenHelper{
 
@@ -44,6 +46,7 @@ public class DataDbHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES2);
+        db.execSQL(SQL_CREATE_ENTRIES3);
 
 
 
@@ -114,7 +117,10 @@ public class DataDbHelper extends SQLiteOpenHelper{
         }else if (i == 1){
             String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME2 + " WHERE name='"+temp+"'";
             return db.rawQuery(query, null);
-        }else {
+        }else if (i == 2){
+            String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME3 + " WHERE name='"+temp+"'";
+            return db.rawQuery(query, null);
+        } else  {
             return null;
         }
     }
@@ -141,6 +147,11 @@ public class DataDbHelper extends SQLiteOpenHelper{
     @Override
     public SQLiteDatabase getWritableDatabase() {
         return super.getWritableDatabase();
+    }
+    public Cursor getItemIDToDelete (String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COLUMN_ID + " FROM " + TABLE_NAME2 + " WHERE " + COLUMN_NAME_NAME + " = '" + name + "'";
+        return db.rawQuery(query, null);
     }
 
     public void closeDatabase(){

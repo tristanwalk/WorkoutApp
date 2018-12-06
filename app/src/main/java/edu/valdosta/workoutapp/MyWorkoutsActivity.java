@@ -2,6 +2,7 @@ package edu.valdosta.workoutapp;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,13 +30,13 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
 
     private ImageButton addCustomWorkout;
     private int buttonId;
-    private int menuItemId;
+    private int menuItemId, b;
     private Intent intent;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abToggle;
     private android.support.v7.widget.Toolbar toolbar;
     private NavigationView navView;
-    String workoutTableName;
+    String workoutTableName, i;
     DataDbHelper mDatabaseHelper;
     ArrayList<String> listOfItems;
     ListView customWorkouts;
@@ -52,6 +53,8 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
 
         intent = getIntent();
 
+        i = intent.getStringExtra("nameOfWorkout");
+        b = intent.getIntExtra("ID", 0);
 
 
 
@@ -162,6 +165,12 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
 
 
     }
+
+    public void onClickDelete (View view) {
+        intent = new Intent(this, DeleteFromWorkoutsActivity.class);
+        startActivity(intent);
+    }
+
     public void toastMessage (String m) {
         Toast.makeText(this,m, Toast.LENGTH_SHORT).show();
     }

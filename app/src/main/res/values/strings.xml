@@ -24,5 +24,7 @@
     <string name="title_activity_add_workout">AddWorkoutActivity</string>
     <string name="hintForWorkoutsText">Enter The Name of Your Workout</string>
     <string name="addWorkoutButtonText">Add Workout</string>
+    <string name="deleteWorkoutButtonText">Delete Workout</string>
     <string name="settingsTitle">Settings</string>
+    <string name="hintForDeleteWorkoutsText">Enter Name of Workout to Delete</string>
 </resources>

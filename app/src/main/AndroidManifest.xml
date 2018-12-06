@@ -26,6 +26,8 @@
         <activity android:name=".DisplayExercise" />
         <activity android:name=".AddToWorkoutsActivity"
             android:theme="@style/AppTheme.CustomTheme"/>
+        <activity android:name=".DeleteFromWorkoutsActivity"
+            android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>
