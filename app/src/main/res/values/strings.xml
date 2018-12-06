@@ -18,7 +18,22 @@
     <string name="menuImgDescription">Menu icon for menu button</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="defaultWorkouts">default Workouts</string>
+    <string name="defaultWorkouts">Default Workouts</string>
     <string name="customWorkouts">Custom Workouts</string>
     <string name="addWorkoutButtonDesc"> Button to add a workout into workout database</string>
+    <string name="title_activity_add_workout">AddWorkoutActivity</string>
+    <string name="hintForWorkoutsText">Enter The Name of Your Workout</string>
+    <string name="addWorkoutButtonText">Add Workout</string>
+    <string name="settingsTitle">Settings</string>
+    <string name="weightTitle">Weight:</string>
+    <string name="nameTitle">Name:</string>
+    <string name="ageTitle">Age:</string>
+    <string name="sexTitle">Sex:</string>
+    <string name="heightTitle">Height:</string>
+    <string name="heightTip">(in inches)</string>
+    <string name="maleButtonTitle">Male</string>
+    <string name="femaleButtonTitle">Female</string>
+    <string name="submitButtonTitle">Submit</string>
+    <string name="bmiTitle">BMI:</string>
+
 </resources>

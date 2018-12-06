@@ -1,6 +1,7 @@
 package edu.valdosta.workoutapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,13 +9,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import static android.media.CamcorderProfile.get;
 
 public class MyWorkoutsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private ImageButton addCustomWorkout;
     private int buttonId;
     private int menuItemId;
     private Intent intent;
@@ -22,11 +35,22 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
     private ActionBarDrawerToggle abToggle;
     private android.support.v7.widget.Toolbar toolbar;
     private NavigationView navView;
+    String workoutTableName;
+    DataDbHelper mDatabaseHelper;
+    ArrayList<String> listOfItems;
+    ListView customWorkouts;
+    ArrayAdapter<String> arrayAdapter;
+    Button addButton;
+    int newItemID = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workouts);
+
+        intent = getIntent();
 
         setNavigationViewListener();
 
@@ -42,39 +66,36 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+
+
+        customWorkouts = findViewById(R.id.customWorkoutsList);
+        addButton = findViewById(R.id.addWorkoutButton);
+        mDatabaseHelper = new DataDbHelper(this);
+
+
+        customWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = listOfItems.get(position);
+                intent = new Intent(getApplicationContext(),RegionActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+
+
+            }
+        });
+
+        arrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                listOfItems
+        );
+
+        populateList();
     }
 
-    /*public void onClick(View view) {
-        buttonId = view.getId();
-
-        switch (buttonId) {
-            case R.id.strengthButton:
-                intent = new Intent(this, StrengthActivity.class);
-                break;
-            case R.id.enduranceButton:
-                intent = new Intent(this, EnduranceActivity.class);
-                break;
-            case R.id.flexibilityButton:
-                intent = new Intent(this, FlexibiltyActivity.class);
-                break;
-            case R.id.balanceButton:
-                intent = new Intent(this, BalanceActivity.class);
-                break;
-        }
-        startActivity(intent);
-    }*/
-
     public void onClick(View view) {
-        buttonId = view.getId();
-
-        switch (buttonId) {
-            case R.id.defaultWorkoutButton:
-                intent = new Intent(this, StrengthActivity.class);
-                break;
-            case R.id.customWorkoutButton:
-                intent = new Intent(this, EnduranceActivity.class);
-                break;
-        }
+        intent = new Intent(this, AddToWorkoutsActivity.class);
         startActivity(intent);
     }
 
@@ -91,6 +112,11 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             }
+            case R.id.Settings: {
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
         return true;
     }
@@ -105,4 +131,29 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
         return abToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
     }
+
+    public void populateList() {
+        Cursor data = mDatabaseHelper.getData();
+        String a;
+
+        listOfItems = new ArrayList<>();
+
+            while (data.moveToNext()) {
+                a = data.getString(1);
+                listOfItems.add(a);
+            }
+        arrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                listOfItems
+        );
+        customWorkouts.setAdapter(arrayAdapter);
+    }
+    public void toastMessage (String m) {
+        Toast.makeText(this,m, Toast.LENGTH_SHORT).show();
+    }
+
 }
+
+
+

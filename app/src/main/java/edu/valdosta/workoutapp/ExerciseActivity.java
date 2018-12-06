@@ -89,6 +89,11 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             }
+            case R.id.Settings: {
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
         return true;
     }
