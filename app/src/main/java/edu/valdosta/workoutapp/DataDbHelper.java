@@ -18,20 +18,21 @@ import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_LIN
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_NAME;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_REGION;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_TYPE;
-//import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_WORKOUT;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES3;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_DELETE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME2;
-//import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_ID;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_ID;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES2;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME3;
 
 public class DataDbHelper extends SQLiteOpenHelper{
 
     private Context mContext;
 
     public DataDbHelper dbhelper;
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Workouts.db";
     private String line;
     SQLiteDatabase db;
@@ -45,6 +46,10 @@ public class DataDbHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES2);
+        db.execSQL(SQL_CREATE_ENTRIES3);
+
+
+
 
         InputStream is = mContext.getResources().openRawResource(R.raw.exercises);
         //read line by line
@@ -58,7 +63,6 @@ public class DataDbHelper extends SQLiteOpenHelper{
                 System.out.println("columns[2]:" + columns[2]);
                 System.out.println("columns[3]:" + columns[3]);
                 System.out.println("columns[4]:" + columns[4]);
-                //System.out.println("columns[4]:" + columns[5]);
                 boolean insertData = addData(db, columns[0].trim(), columns[1].trim(), columns[2].trim(), columns[3].trim(), columns[4].trim());
                 if (insertData) {
                     Log.v("addData", "Successful");
@@ -89,8 +93,7 @@ public class DataDbHelper extends SQLiteOpenHelper{
         contentValues.put(COLUMN_NAME_REGION, region);
         contentValues.put(COLUMN_NAME_TYPE, type);
         contentValues.put(COLUMN_NAME_LINK, link);
-        //contentValues.put(COLUMN_NAME_WORKOUT, workout);
-        
+
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         return result != -1;
@@ -114,7 +117,10 @@ public class DataDbHelper extends SQLiteOpenHelper{
         }else if (i == 1){
             String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME2 + " WHERE name='"+temp+"'";
             return db.rawQuery(query, null);
-        }else {
+        }else if (i == 2){
+            String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME3 + " WHERE name='"+temp+"'";
+            return db.rawQuery(query, null);
+        } else  {
             return null;
         }
     }
@@ -124,13 +130,12 @@ public class DataDbHelper extends SQLiteOpenHelper{
         String query = "SELECT " + COLUMN_NAME_DESCRIPTION + " FROM " + TABLE_NAME + " WHERE name='"+exercise+"'";
         return db.rawQuery(query, null);
     }
-    /*
     public void deleteData(String name, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME2 + " WHERE " + COLUMN_ID + " = '" + id + "'" + " AND " + COLUMN_NAME_NAME + " = '" + name + "'";
         db.execSQL(query);
+
     }
-    */
 
     public Cursor getData() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -138,9 +143,15 @@ public class DataDbHelper extends SQLiteOpenHelper{
         return db.rawQuery(query, null);
     }
 
+
     @Override
     public SQLiteDatabase getWritableDatabase() {
         return super.getWritableDatabase();
+    }
+    public Cursor getItemIDToDelete (String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COLUMN_ID + " FROM " + TABLE_NAME2 + " WHERE " + COLUMN_NAME_NAME + " = '" + name + "'";
+        return db.rawQuery(query, null);
     }
 
     public void closeDatabase(){
