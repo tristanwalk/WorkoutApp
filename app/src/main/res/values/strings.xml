@@ -34,6 +34,16 @@
     <string name="maleButtonTitle">Male</string>
     <string name="femaleButtonTitle">Female</string>
     <string name="submitButtonTitle">Submit</string>
-    <string name="bmiTitle">BMI:</string>
+    <string name="bmiTitle">Current BMI:</string>
+    <string name="physicalAbility">Which word best describes your physical ability?</string>
+    <string name="knowledge">How would you describe your knowledge of a gym?</string>
+    <string name="weak">Weak</string>
+    <string name="neutral">Neutral</string>
+    <string name="athletic">Athletic</string>
+    <string name="novice">Novice</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="expert">Expert</string>
+
+
 
 </resources>

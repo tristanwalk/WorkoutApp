@@ -1,6 +1,5 @@
 package edu.valdosta.workoutapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,10 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-import java.lang.reflect.InvocationTargetException;
+
 import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
     private int age;
     private double heightInInches;
     private double bmi;
@@ -49,17 +49,17 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        maleRadio = (RadioButton) findViewById(R.id.maleRadio);
-        femaleRadio = (RadioButton) findViewById(R.id.femaleRadio);
-        weak = (RadioButton) findViewById(R.id.weak);
-        neutral = (RadioButton) findViewById(R.id.neutral);
-        athletic = (RadioButton) findViewById(R.id.athletic);
-        novice = (RadioButton) findViewById(R.id.novice);
-        intermediate = (RadioButton) findViewById(R.id.intermediate);
-        expert = (RadioButton) findViewById(R.id.expert);
-        nameView = (EditText) findViewById(R.id.nameView);
-        ageView = (EditText) findViewById(R.id.ageView);
-        heightView = (EditText) findViewById(R.id.heightView);
+        maleRadio = findViewById(R.id.maleRadio);
+        femaleRadio =  findViewById(R.id.femaleRadio);
+        weak =  findViewById(R.id.weak);
+        neutral = findViewById(R.id.neutral);
+        athletic =  findViewById(R.id.athletic);
+        novice = findViewById(R.id.novice);
+        intermediate =  findViewById(R.id.intermediate);
+        expert =  findViewById(R.id.expert);
+        nameView = findViewById(R.id.nameView);
+        ageView = findViewById(R.id.ageView);
+        heightView =  findViewById(R.id.heightView);
 
         setNavigationViewListener();
 
@@ -96,20 +96,22 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     public void submitOnClick(View view){
         try {
             if (maleRadio.isChecked()) {
-                sex = "@string/Male";
+                sex = getString(R.string.maleButtonTitle);
             } else {
-                sex = "@string/Female";
+                sex = getString(R.string.femaleButtonTitle);
             }
 
             name = nameView.getText().toString();
             age = Integer.parseInt(ageView.getText().toString());
-            //System.out.print(age);
             heightInInches = Double.parseDouble(heightView.getText().toString());
-            //System.out.print(heightInInches);
             weight = Double.parseDouble(weightView.getText().toString());
-            //System.out.println(weight);
             Intent intent = new Intent(this, SettingsActivity.class);
             intent.putExtra("bmi", calculateBMI(heightInInches, weight));
+            intent.putExtra("name", name);
+            intent.putExtra("sex", sex);
+            intent.putExtra("age", age);
+            intent.putExtra("height", heightInInches);
+            intent.putExtra("weight", weight);
             startActivity(intent);
         }
         catch (NumberFormatException | IllegalStateException e){
@@ -136,7 +138,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         name = nameView.getText().toString();
         age = Integer.parseInt(ageView.getText().toString());
-        heightInInches = Integer.parseInt(heightView.getText().toString());;
+        heightInInches = Integer.parseInt(heightView.getText().toString());
     }
 
     public void setNavigationViewListener() {
