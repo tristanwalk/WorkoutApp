@@ -35,5 +35,7 @@
     <string name="femaleButtonTitle">Female</string>
     <string name="submitButtonTitle">Submit</string>
     <string name="bmiTitle">BMI:</string>
+    <string name="deleteWorkoutButtonText">Delete Workout</string>
+    <string name="hintForDeleteWorkoutsText">Enter Workout to Delete</string>
 
 </resources>

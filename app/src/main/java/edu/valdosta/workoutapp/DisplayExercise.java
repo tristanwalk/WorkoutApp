@@ -13,8 +13,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DisplayExercise extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,9 +26,6 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
     private int menuItemId;
     private TextView scrollTextView;
     private ScrollView scrollView;
-    private String regex = "Step ";
-    private Pattern pattern = Pattern.compile(regex);
-    private Matcher matcher = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,28 +59,11 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
 
     private void populateTextView() {
         Cursor data = dbHelper.getDescription(exercise);
-        int spot = 0;
         while(data.moveToNext()){
-            /*
-            String line = data.getString(0);
-            System.out.println(line);
-            matcher = pattern.matcher(line);
-            while (matcher.find()){
-                int newSpot = matcher.start();
-                if (newSpot == 1){
-                    spot+=newSpot-1;
-                    continue;
-                }
-                System.out.println("NewSpot: " + newSpot);
-                String newLine = line.substring(spot, newSpot);
-                spot += newSpot-1;
-                System.out.println(newLine);
-            }
-            */
-
             scrollTextView.setText(data.getString(0));
         }
         //scrollView.setView(scrollTextView);
+
     }
 
     public void setNavigationViewListener() {
@@ -104,7 +82,6 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
             }
             case R.id.MyWorkouts: {
                 intent = new Intent(this, MyWorkoutsActivity.class);
-                startActivity(intent);
                 break;
             }
             case R.id.Settings: {

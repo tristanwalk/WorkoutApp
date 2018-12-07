@@ -23,7 +23,7 @@ import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTR
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_DELETE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME2;
-//import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_ID;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_ID;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES2;
 
 public class DataDbHelper extends SQLiteOpenHelper{
@@ -44,7 +44,10 @@ public class DataDbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
-        //db.execSQL(SQL_CREATE_ENTRIES2);
+        db.execSQL(SQL_CREATE_ENTRIES2);
+
+
+
 
         InputStream is = mContext.getResources().openRawResource(R.raw.exercises);
         //read line by line
@@ -141,6 +144,11 @@ public class DataDbHelper extends SQLiteOpenHelper{
     @Override
     public SQLiteDatabase getWritableDatabase() {
         return super.getWritableDatabase();
+    }
+    public Cursor getItemIDToDelete (String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COLUMN_ID + " FROM " + TABLE_NAME2 + " WHERE " + COLUMN_NAME_NAME + " = '" + name + "'";
+        return db.rawQuery(query, null);
     }
 
     public void closeDatabase(){
