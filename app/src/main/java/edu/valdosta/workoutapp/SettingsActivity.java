@@ -79,6 +79,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             }
             case R.id.MyWorkouts: {
                 intent = new Intent(this, MyWorkoutsActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.Settings: {

@@ -35,5 +35,6 @@
     <string name="femaleButtonTitle">Female</string>
     <string name="submitButtonTitle">Submit</string>
     <string name="bmiTitle">BMI:</string>
+    <string name="addButtonText">+</string>
 
 </resources>

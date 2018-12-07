@@ -32,6 +32,7 @@ public class AddToWorkoutsActivity extends AppCompatActivity {
     Button addButton;
     int newItemID = 0;
      Intent intent;
+     String exercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,8 @@ public class AddToWorkoutsActivity extends AppCompatActivity {
         input = findViewById(R.id.workoutName);
 
         intent = getIntent();
-        workoutTableName = " ";
+        //exercise = intent.getStringExtra("exercise");
+        workoutTableName = "";
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -51,9 +53,18 @@ public class AddToWorkoutsActivity extends AppCompatActivity {
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*.8), (int)(height*.2));
 
-
-
+        /*
+        if (!exercise.equals("")){
+            addDatatoWorkout(exercise);
+        }
+        */
     }
+
+    /*
+    private void addDatatoWorkout(String exercise) {
+        boolean insertData = mDatabaseHelper.addToWorkout(e)
+    }
+    */
 
     public void onClick (View view) {
         String i = input.getText().toString();

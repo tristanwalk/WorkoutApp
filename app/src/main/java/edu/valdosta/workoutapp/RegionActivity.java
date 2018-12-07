@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -49,11 +48,6 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
         Intent intent = getIntent();
         region = intent.getStringExtra("region");
         workoutName = intent.getStringExtra("name");
-
-
-
-
-
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(region + " Exercises");
@@ -114,6 +108,7 @@ public class RegionActivity extends AppCompatActivity implements NavigationView.
             }
             case R.id.MyWorkouts: {
                 intent = new Intent(this, MyWorkoutsActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.Settings: {

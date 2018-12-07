@@ -27,16 +27,17 @@
         <ScrollView
             android:id="@+id/descriptionScrollView"
             android:layout_width="368dp"
-            android:layout_height="376dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="323dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.092">
 
             <TextView
                 android:id="@+id/scrollViewTextView"
@@ -44,6 +45,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
+
+        <TextView
+            android:id="@+id/linkTextView"
+            style="@style/normalText"
+            android:layout_width="340dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/addButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionScrollView" />
+
+        <Button
+            android:id="@+id/addButton"
+            style="@style/headerText"
+            android:layout_width="80dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="381dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center|top"
+            android:onClick="addToWorkout"
+            android:text="@string/addButtonText"
+            android:textAlignment="gravity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linkTextView" />
 
 
     </android.support.constraint.ConstraintLayout>

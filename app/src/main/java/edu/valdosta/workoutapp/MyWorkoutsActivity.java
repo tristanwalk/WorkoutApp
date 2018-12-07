@@ -80,8 +80,6 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
                 intent = new Intent(getApplicationContext(),RegionActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
-
-
             }
         });
 

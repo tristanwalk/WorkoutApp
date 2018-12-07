@@ -18,7 +18,7 @@ import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_LIN
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_NAME;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_REGION;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_TYPE;
-//import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_WORKOUT;
+import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.COLUMN_NAME_WORKOUT;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_CREATE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.SQL_DELETE_ENTRIES;
 import static edu.valdosta.workoutapp.DatabaseContract.DataEntry.TABLE_NAME;
@@ -31,7 +31,7 @@ public class DataDbHelper extends SQLiteOpenHelper{
     private Context mContext;
 
     public DataDbHelper dbhelper;
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "Workouts.db";
     private String line;
     SQLiteDatabase db;
@@ -44,7 +44,7 @@ public class DataDbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
-        db.execSQL(SQL_CREATE_ENTRIES2);
+        //db.execSQL(SQL_CREATE_ENTRIES2);
 
         InputStream is = mContext.getResources().openRawResource(R.raw.exercises);
         //read line by line
@@ -89,13 +89,13 @@ public class DataDbHelper extends SQLiteOpenHelper{
         contentValues.put(COLUMN_NAME_REGION, region);
         contentValues.put(COLUMN_NAME_TYPE, type);
         contentValues.put(COLUMN_NAME_LINK, link);
-        //contentValues.put(COLUMN_NAME_WORKOUT, workout);
         
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         return result != -1;
     }
 
+    //adds to the table2
     public boolean addDataToCustomWorkouts(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -106,13 +106,21 @@ public class DataDbHelper extends SQLiteOpenHelper{
         return result != -1;
     }
 
+    //adds to the last column of table1
+    public void addToWorkout(String workoutName, String exercise){
+        SQLiteDatabase db = this.getWritableDatabase();
+        //ContentValues cv = new ContentValues();
+        //cv.put(COLUMN_NAME_WORKOUT, name);
+        db.execSQL("UPDATE "+ TABLE_NAME + " SET " + COLUMN_NAME_WORKOUT + " = '" + workoutName +  "' FROM " + TABLE_NAME + " WHERE name='" + exercise + "'");
+        }
+
     public Cursor getName(String temp, int i){
         SQLiteDatabase db = this.getWritableDatabase();
         if (i == 0){
             String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE region='"+temp+"'";
             return db.rawQuery(query, null);
         }else if (i == 1){
-            String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME2 + " WHERE name='"+temp+"'";
+            String query = "SELECT " + COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE workout='"+temp+"'";
             return db.rawQuery(query, null);
         }else {
             return null;
@@ -122,6 +130,12 @@ public class DataDbHelper extends SQLiteOpenHelper{
     public Cursor getDescription(String exercise) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COLUMN_NAME_DESCRIPTION + " FROM " + TABLE_NAME + " WHERE name='"+exercise+"'";
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor getLink(String exercise) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COLUMN_NAME_LINK + " FROM " + TABLE_NAME + " WHERE name='"+exercise+"'";
         return db.rawQuery(query, null);
     }
     /*

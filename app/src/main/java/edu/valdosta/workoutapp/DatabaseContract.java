@@ -14,6 +14,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_REGION = "region";
         public static final String COLUMN_NAME_TYPE = "type";
         public static final String COLUMN_NAME_LINK = "link";
+        public static final String COLUMN_NAME_WORKOUT = "workout";
 
         public static final String SQL_CREATE_ENTRIES = "Create table " +
                 DataEntry.TABLE_NAME + " (" + DataEntry._ID + " INTEGER PRIMARY KEY, " +
@@ -21,7 +22,8 @@ public final class DatabaseContract {
                 DataEntry.COLUMN_NAME_DESCRIPTION + " TEXT, " +
                 DataEntry.COLUMN_NAME_REGION + " TEXT, " +
                 DataEntry.COLUMN_NAME_TYPE + " TEXT, " +
-                DataEntry.COLUMN_NAME_LINK + " TEXT)";
+                DataEntry.COLUMN_NAME_LINK + " TEXT, " +
+                DataEntry.COLUMN_NAME_WORKOUT + " TEXT)";
 
         public static final String SQL_CREATE_ENTRIES2 = "Create table " +
                 DataEntry.TABLE_NAME2 + " (" + DataEntry._ID + " INTEGER PRIMARY KEY, " +

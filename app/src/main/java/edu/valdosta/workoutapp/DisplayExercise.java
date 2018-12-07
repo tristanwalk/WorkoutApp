@@ -8,9 +8,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -31,6 +34,7 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
     private String regex = "Step ";
     private Pattern pattern = Pattern.compile(regex);
     private Matcher matcher = null;
+    private TextView linkTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
         drawerLayout.addDrawerListener(abToggle);
         abToggle.syncState();
 
+        linkTextView = findViewById(R.id.linkTextView);
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(exercise);
         setSupportActionBar(toolbar);
@@ -60,6 +66,15 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
         scrollView = findViewById(R.id.descriptionScrollView);
 
         populateTextView();
+    }
+
+    public void addToWorkout(View view){
+        //boolean add = dbHelper.addToWorkout(exercise);
+
+        intent = new Intent(this, AddToCustomWorkoutActivity.class);
+        intent.putExtra("exercise", exercise);
+        startActivity(intent);
+
     }
 
     private void populateTextView() {
@@ -85,6 +100,13 @@ public class DisplayExercise extends AppCompatActivity implements NavigationView
 
             scrollTextView.setText(data.getString(0));
         }
+
+        Cursor data2 = dbHelper.getLink(exercise);
+        int spot2 = 0;
+        while(data2.moveToNext()){
+            linkTextView.setText(data2.getString(0));
+        }
+
         //scrollView.setView(scrollTextView);
     }
 

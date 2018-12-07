@@ -115,6 +115,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             }
             case R.id.MyWorkouts: {
                 intent = new Intent(this, MyWorkoutsActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.Settings: {
