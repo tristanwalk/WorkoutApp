@@ -48,18 +48,10 @@ public class DeleteFromWorkoutsActivity extends AppCompatActivity {
 
     }
 
+
+
     public void onClick (View view) {
         String i = input.getText().toString();
-       /* //fix so that i cannot be empty
-        if (i.equals("")){
-            System.out.println(i);
-            deleteData(i);
-            intent = new Intent(this, MyWorkoutsActivity.class);
-            intent.putExtra("nameofWorkout" , i);
-            startActivity(intent);
-        }else {
-            toastMessage("Text field cannot be blank");
-        }*/
 
         System.out.println(i);
         Cursor data =  mDatabaseHelper.getItemIDToDelete(i);
