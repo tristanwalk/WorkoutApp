@@ -31,7 +31,7 @@ public class DataDbHelper extends SQLiteOpenHelper{
     private Context mContext;
 
     public DataDbHelper dbhelper;
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "Workouts.db";
     private String line;
     SQLiteDatabase db;
@@ -44,7 +44,7 @@ public class DataDbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
-        db.execSQL(SQL_CREATE_ENTRIES2);
+        //db.execSQL(SQL_CREATE_ENTRIES2);
 
         InputStream is = mContext.getResources().openRawResource(R.raw.exercises);
         //read line by line
