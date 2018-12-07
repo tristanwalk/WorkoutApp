@@ -167,7 +167,7 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
     }
 
     public void onClickDelete (View view) {
-        intent = new Intent(this, DeleteFromWorkoutsActivity.class);
+        intent = new Intent(getApplicationContext(), DeleteFromWorkoutsActivity.class);
         startActivity(intent);
     }
 
