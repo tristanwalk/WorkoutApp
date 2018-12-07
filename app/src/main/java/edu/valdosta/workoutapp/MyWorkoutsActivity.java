@@ -2,6 +2,7 @@ package edu.valdosta.workoutapp;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,13 +30,13 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
 
     private ImageButton addCustomWorkout;
     private int buttonId;
-    private int menuItemId;
+    private int menuItemId, b;
     private Intent intent;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abToggle;
     private android.support.v7.widget.Toolbar toolbar;
     private NavigationView navView;
-    String workoutTableName;
+    String workoutTableName, i;
     DataDbHelper mDatabaseHelper;
     ArrayList<String> listOfItems;
     ListView customWorkouts;
@@ -51,6 +52,11 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
         setContentView(R.layout.activity_my_workouts);
 
         intent = getIntent();
+
+        i = intent.getStringExtra("nameOfWorkout");
+        b = intent.getIntExtra("ID", 0);
+
+
 
         setNavigationViewListener();
 
@@ -85,14 +91,18 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
             }
         });
 
+
         arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 listOfItems
         );
 
+
         populateList();
+
     }
+
 
     public void onClick(View view) {
         intent = new Intent(this, AddToWorkoutsActivity.class);
@@ -148,7 +158,19 @@ public class MyWorkoutsActivity extends AppCompatActivity implements NavigationV
                 listOfItems
         );
         customWorkouts.setAdapter(arrayAdapter);
+
+
+
+
+
+
     }
+
+    public void onClickDelete (View view) {
+        intent = new Intent(this, DeleteFromWorkoutsActivity.class);
+        startActivity(intent);
+    }
+
     public void toastMessage (String m) {
         Toast.makeText(this,m, Toast.LENGTH_SHORT).show();
     }
